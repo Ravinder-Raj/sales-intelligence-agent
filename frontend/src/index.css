@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #374151;
+  border-radius: 9999px;
+}
+
+@media print {
+  body {
+    background: #111827 !important;
+    color: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-area {
+    width: 100% !important;
+    display: block !important;
+  }
+}

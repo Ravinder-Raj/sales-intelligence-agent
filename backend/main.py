@@ -5,8 +5,21 @@ from graph import build_graph
 from dotenv import load_dotenv
 import os
 import traceback
+import logging
 
 load_dotenv()
+
+# ---------- LOGGER ----------
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
+
+
+ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "http://localhost:5173").split(",")
+logger.info(f"Allowed origins: {ALLOWED_ORIGINS}")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -18,11 +31,7 @@ app = FastAPI(
 # Setup CORS — allows frontend to talk to backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.getenv("FRONTEND_URL"),
-        "http://127.0.0.1:5173",
-        "http://localhost:5173",
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
